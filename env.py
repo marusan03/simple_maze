@@ -11,20 +11,20 @@ from .goal import Goal
 from .utils import Directions
 
 
-class MuzeEnv(gym.Env):
+class MazeEnv(gym.Env):
     def __init__(self, **kwargs):
         super().__init__()
         pygame.init()
-        self._shape = (160, 160, 3)
+        self._shape = (210, 160, 3)
         self.observation_space = gym.spaces.Box(
             low=0,
             high=255,
             shape=self._shape,
             dtype=np.uint8
         )
-        self.reward_range = [-1.0, 100.0]
+        self.reward_range = [-10.0, 10.0]
 
-        self.scale = 7
+        self.scale = 3
         self.surface = None
         self.dirty_rects = None
         self.action_space = gym.spaces.Discrete(4)
@@ -40,14 +40,18 @@ class MuzeEnv(gym.Env):
 
         self.directions = Directions()
 
+        self.global_step = 0
+
     def reset(self):
         self.player.reset()
         self.goal.reset()
         self.maze_surface = self.maze.copy()
         self.backgrand = self.maze.copy()
 
+        self.global_step = 0
+
         self.dirty_rects = self.sprites.draw(self.maze_surface)
-        screen = pygame.transform.scale(self.maze_surface, [160, 160])
+        screen = pygame.transform.scale(self.maze_surface, [210, 160])
         observation = pygame.surfarray.array3d(screen).swapaxes(0, 1)
 
         screen = pygame.transform.scale(
@@ -56,19 +60,24 @@ class MuzeEnv(gym.Env):
         return observation
 
     def step(self, action):
-        pygame.event.pump()
-        info = False
+        if not (self.surface is None):
+            pygame.event.pump()
+        info = None
         self.sprites.clear(self.maze_surface, self.backgrand)
         self.player.update(1 << action)
         if pygame.sprite.collide_rect(self.player, self.goal):
-            reward = 100
+            reward = 10
+            done = True
+        elif self.global_step > 100:
+            reward = -10
             done = True
         else:
-            reward = -1
+            reward = -0.1
             done = False
         self.dirty_rects = self.sprites.draw(self.maze_surface)
-        screen = pygame.transform.scale(self.maze_surface, [160, 160])
+        screen = pygame.transform.scale(self.maze_surface, [210, 160])
         observation = pygame.surfarray.array3d(screen).swapaxes(0, 1)
+        self.global_step += 1
 
         return observation, reward, done, info
 

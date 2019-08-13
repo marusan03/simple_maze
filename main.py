@@ -2,8 +2,6 @@
 
 import sys
 
-import numpy as np
-
 import pygame
 from pygame.locals import (
     QUIT,
@@ -15,7 +13,7 @@ from pygame.locals import (
     K_DOWN,
     K_SPACE)
 
-from config import Config
+# from config import Config
 from maze import build_maze
 from player import Player
 from goal import Goal
@@ -90,4 +88,4 @@ def main(scale):
 
 
 if __name__ == '__main__':
-    main(scale=10)
+    main(scale=3)

@@ -1,7 +1,7 @@
 import math
 import pygame
 import numpy as np
-from utils import Directions
+from .utils import Directions
 
 
 class Player(pygame.sprite.DirtySprite):
