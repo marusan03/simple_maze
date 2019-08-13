@@ -1,11 +1,10 @@
 '''maze'''
 
 import numpy as np
-import pygame
 from pygame import surfarray
 # from PIL import Image
 
-from utils import Directions
+from .utils import Directions
 
 
 def build_maze(width, height):
