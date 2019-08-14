@@ -45,8 +45,8 @@ class MazeEnv(gym.Env):
     def reset(self):
         self.player.reset()
         self.goal.reset()
-        self.maze_surface = self.maze.copy()
-        self.backgrand = self.maze.copy()
+        # self.maze_surface = self.maze.copy()
+        # self.backgrand = self.maze.copy()
 
         self.global_step = 0
 
