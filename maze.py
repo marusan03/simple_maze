@@ -10,6 +10,7 @@ from .utils import Directions
 def build_maze(width, height):
     '''build maze'''
 
+    np.random.seed(seed=123)
     directions = Directions()  # 上 右 下 左
     directions = directions.get()
     maze = [[1 for i in range(width * 2 + 1)] for j in range(height * 2 + 1)]

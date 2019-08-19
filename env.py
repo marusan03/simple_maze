@@ -24,7 +24,7 @@ class MazeEnv(gym.Env):
         )
         self.reward_range = [-10.0, 10.0]
 
-        self.scale = 3
+        self.scale = 5
         self.surface = None
         self.dirty_rects = None
         self.action_space = gym.spaces.Discrete(4)
