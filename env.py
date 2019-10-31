@@ -66,13 +66,13 @@ class MazeEnv(gym.Env):
         self.sprites.clear(self.maze_surface, self.backgrand)
         self.player.update(1 << action)
         if pygame.sprite.collide_rect(self.player, self.goal):
-            reward = 10
+            reward = 1.
             done = True
-        elif self.global_step > 100:
-            reward = -10
+        elif self.global_step >= 1000:
+            reward = -0.001
             done = True
         else:
-            reward = -0.1
+            reward = -0.001
             done = False
         self.dirty_rects = self.sprites.draw(self.maze_surface)
         screen = pygame.transform.scale(self.maze_surface, [210, 160])
