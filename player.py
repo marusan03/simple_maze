@@ -1,4 +1,3 @@
-import math
 import pygame
 import numpy as np
 from .utils import Directions
@@ -31,3 +30,4 @@ class Player(pygame.sprite.DirtySprite):
     def reset(self):
         self.rect.topleft = (1, 1)
         self.topleft_map = np.array([1, 1])
+        self.dirty = 1
