@@ -79,9 +79,7 @@ class MazeEnv(gym.Env):
         observation = pygame.surfarray.array3d(screen).swapaxes(0, 1)
         self.global_step += 1
 
-        action_available = self.player.action_available()
-
-        info = {"action_available": action_available}
+        info = self.action_available()
 
         return observation, reward, done, info
 
@@ -97,6 +95,10 @@ class MazeEnv(gym.Env):
             self.maze_surface, [160*4, 160*4]), [0, 0])
         pygame.display.update(self.dirty_rects)
         print(f'fps:{int(1/((self.clock.tick(60)/1000)+10e-4))}\r', end='')
+
+    def action_available(self):
+        action_available = self.player.actionaction_available_available()
+        return {"": action_available}
 
     def close(self):
         pass
