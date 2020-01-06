@@ -97,7 +97,7 @@ class MazeEnv(gym.Env):
         print(f'fps:{int(1/((self.clock.tick(60)/1000)+10e-4))}\r', end='')
 
     def action_available(self):
-        action_available = self.player.actionaction_available_available()
+        action_available = self.player.actionaction_available()
         return {"": action_available}
 
     def close(self):
