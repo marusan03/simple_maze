@@ -68,7 +68,7 @@ class MazeEnv(gym.Env):
         if pygame.sprite.collide_rect(self.player, self.goal):
             reward = 1.
             done = True
-        elif self.global_step >= 1000:
+        elif self.global_step >= (1000 - 1):
             reward = -0.001
             done = True
         else:
