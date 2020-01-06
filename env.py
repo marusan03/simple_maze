@@ -98,7 +98,7 @@ class MazeEnv(gym.Env):
 
     def action_available(self):
         action_available = self.player.action_available()
-        return {"": action_available}
+        return {"action_available": action_available}
 
     def close(self):
         pass
