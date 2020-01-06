@@ -11,7 +11,8 @@ from pygame.locals import (
     K_RIGHT,
     K_UP,
     K_DOWN,
-    K_SPACE)
+    K_SPACE,
+    K_r)
 
 # from config import Config
 from maze import build_maze
@@ -57,19 +58,23 @@ def main(scale):
                     pygame.quit()
                     sys.exit()
                 # 矢印キーなら円の中心座標を矢印の方向に移動
-                if event.key == K_LEFT:
+                elif event.key == K_LEFT:
                     player.update(
                         directions.direction_to_flag(directions.left))
-                if event.key == K_RIGHT:
+                elif event.key == K_RIGHT:
                     player.update(
                         directions.direction_to_flag(directions.right))
-                if event.key == K_UP:
+                elif event.key == K_UP:
                     player.update(
                         directions.direction_to_flag(directions.up))
                 if event.key == K_DOWN:
                     player.update(
                         directions.direction_to_flag(directions.down))
-                if event.key == K_SPACE:
+                elif event.key == K_r:
+                    sprites.clear(maze_surface, backgrand)
+                    player.reset()
+                    goal.reset()
+                elif event.key == K_SPACE:
                     screen = pygame.transform.scale(
                         maze_surface, [160*4, 160*4])
                     screenshot(pygame.surfarray.array3d(screen).swapaxes(0, 1))

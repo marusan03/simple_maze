@@ -63,7 +63,6 @@ class MazeEnv(gym.Env):
     def step(self, action):
         if not (self.surface is None):
             pygame.event.pump()
-        info = None
         self.sprites.clear(self.maze_surface, self.backgrand)
         self.player.update(1 << action)
         if pygame.sprite.collide_rect(self.player, self.goal):
@@ -79,6 +78,10 @@ class MazeEnv(gym.Env):
         screen = pygame.transform.scale(self.maze_surface, [210, 160])
         observation = pygame.surfarray.array3d(screen).swapaxes(0, 1)
         self.global_step += 1
+
+        action_available = self.player.action_available()
+
+        info = {"action_available": action_available}
 
         return observation, reward, done, info
 

@@ -27,6 +27,10 @@ class Player(pygame.sprite.DirtySprite):
             self.rect.topleft = self.topleft_map
             self.dirty = 1
 
+    def action_available(self):
+        x, y = self.topleft_map
+        return [i for i in range(4) if self.accesible_map[x][y] & 2**i]
+
     def reset(self):
         self.rect.topleft = (1, 1)
         self.topleft_map = np.array([1, 1])
